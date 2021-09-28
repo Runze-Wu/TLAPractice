@@ -950,17 +950,30 @@
 \pcalsymbolstrue
 \pcalshadingtrue
 \csyntaxtrue
-\@x{ {\p@mmalgorithm} Euclid {\p@lbrace}}%
- \@x{\@s{16.4} {\p@variables} x \.{\in} 1 \.{\dotdot} N ,\, y\@s{13.76}
- \.{\in} 1 \.{\dotdot} N ,\, x0 \.{=} x ,\, y0 \.{=} y {\p@semicolon}}%
- \@x{\@s{16.4} {\p@lbrace} {\p@while} {\p@lparen} x \.{\neq} y {\p@rparen}
- {\p@lbrace} {\p@if} {\p@lparen} x \.{<} y {\p@rparen} {\p@lbrace} y \.{:=} y
- \.{-} x {\p@rbrace}}%
-\@x{\@s{111.11} {\p@else} {\p@lbrace} x \.{:=} x \.{-} y {\p@rbrace}}%
-\@x{\@s{101.53} {\p@rbrace} {\p@semicolon}}%
-\@x{\@s{25.98} {\p@print} {\langle} x ,\, y {\rangle} {\p@semicolon}}%
- \@x{\@s{25.98} {\p@assert} ( x \.{=} y ) \.{\land} ( x \.{=} GCD ( x0 ,\, y0
- ) ) {\p@semicolon}}%
+\@x{ {\p@mmfair} {\p@algorithm} Euclid {\p@lbrace}}%
+\@x{}%
+\@y{\@s{7.5}%
+ variables \ensuremath{x \.{\in} 1\.{\dotdot}N}, \ensuremath{y \.{\in}
+ 1\.{\dotdot}N}, \ensuremath{x0 \.{=} x}, \ensuremath{y0 \.{=} y};
+}%
+\@xx{}%
+\@x{\@s{16.4} {\p@variables} x \.{=} M ,\, y \.{=} N {\p@semicolon}}%
+ \@x{\@s{16.4} {\p@lbrace} judge\@s{.5}\textrm{:}\@s{3} {\p@while} {\p@lparen}
+ x \.{\neq} y {\p@rparen} {\p@lbrace} {\p@do} \.{:} {\p@if} {\p@lparen} x
+ \.{<} y {\p@rparen} {\p@lbrace} y \.{:=} y \.{-} x {\p@rbrace}}%
+\@x{\@s{100.09} {\p@else} {\p@lbrace} x \.{:=} x \.{-} y {\p@rbrace}}%
+\@x{\@s{94.24} {\p@rbrace} {\p@semicolon}}%
+\@x{}%
+\@y{\@s{12.5}%
+ print \ensuremath{{\langle}x,\, y{\rangle}};
+}%
+\@xx{}%
+\@x{}%
+\@y{\@s{12.5}%
+ assert (\ensuremath{x \.{=} y}) \ensuremath{\.{\land}} (\ensuremath{x \.{=}
+ GCD(x0,\, y0)});
+}%
+\@xx{}%
 \@x{\@s{16.4} {\p@rbrace}}%
 \@x{ {\p@rbrace}}%
 \@y{}%
@@ -973,40 +986,36 @@
 \end{lcom}%
 \@x{}%
 \@y{\@s{0}%
- BEGIN TRANSLATION (\ensuremath{chksum(pcal) \.{=}} ``\ensuremath{48d63aa1}''
- \ensuremath{\.{\land} chksum(tla) \.{=}} ``\ensuremath{2425b90e}'')
+ BEGIN TRANSLATION (\ensuremath{chksum(pcal) \.{=}} ``\ensuremath{65d8d3f8}''
+ \ensuremath{\.{\land} chksum(tla) \.{=}} ``\ensuremath{9d2756b}'')
 }%
 \@xx{}%
-\@x{ {\VARIABLES} x ,\, y ,\, x0 ,\, y0 ,\, pc}%
+\@x{ {\VARIABLES} x ,\, y ,\, pc}%
 \@pvspace{8.0pt}%
-\@x{ vars \.{\defeq} {\langle} x ,\, y ,\, x0 ,\, y0 ,\, pc {\rangle}}%
+\@x{ vars \.{\defeq} {\langle} x ,\, y ,\, pc {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Init\@s{2.02} \.{\defeq}}%
 \@y{\@s{0}%
  Global variables
 }%
 \@xx{}%
-\@x{\@s{37.72} \.{\land} x \.{\in} 1 \.{\dotdot} N}%
-\@x{\@s{37.72} \.{\land} y\@s{0.10} \.{\in} 1 \.{\dotdot} N}%
-\@x{\@s{37.72} \.{\land} x0 \.{=} x}%
-\@x{\@s{37.72} \.{\land} y0\@s{0.10} \.{=} y}%
-\@x{\@s{37.72} \.{\land} pc\@s{1.07} \.{=}\@w{Lbl\_1}}%
+\@x{\@s{37.72} \.{\land} x \.{=} M}%
+\@x{\@s{37.72} \.{\land} y\@s{0.10} \.{=} N}%
+\@x{\@s{37.72} \.{\land} pc \.{=}\@w{judge}}%
 \@pvspace{8.0pt}%
-\@x{ Lbl\_1 \.{\defeq} \.{\land} pc \.{=}\@w{Lbl\_1}}%
-\@x{\@s{42.84} \.{\land} {\IF} x \.{\neq} y}%
-\@x{\@s{66.11} \.{\THEN} \.{\land} {\IF} x \.{<} y}%
-\@x{\@s{120.69} \.{\THEN} \.{\land} y \.{'}\@s{0.10} \.{=} y \.{-} x}%
-\@x{\@s{152.00} \.{\land} x \.{'} \.{=} x}%
-\@x{\@s{120.69} \.{\ELSE} \.{\land} x \.{'} \.{=} x \.{-} y}%
-\@x{\@s{152.00} \.{\land} y \.{'}\@s{0.10} \.{=} y}%
-\@x{\@s{97.42} \.{\land} pc \.{'} \.{=}\@w{Lbl\_1}}%
-\@x{\@s{66.11} \.{\ELSE} \.{\land} PrintT ( {\langle} x ,\, y {\rangle} )}%
- \@x{\@s{97.42} \.{\land} Assert ( ( x \.{=} y ) \.{\land} ( x \.{=} GCD ( x0
- ,\, y0 ) ) ,\,}%
-\@x{\@s{141.12}\@w{Failure\ of\ assertion\ at\ line\ 11,\ column\ 7.} )}%
-\@x{\@s{97.42} \.{\land} pc \.{'} \.{=}\@w{Done}}%
-\@x{\@s{97.42} \.{\land} {\UNCHANGED} {\langle} x ,\, y {\rangle}}%
-\@x{\@s{42.84} \.{\land} {\UNCHANGED} {\langle} x0 ,\, y0 {\rangle}}%
+\@x{ judge \.{\defeq} \.{\land} pc \.{=}\@w{judge}}%
+\@x{\@s{42.38} \.{\land} {\IF} x \.{\neq} y}%
+\@x{\@s{65.65} \.{\THEN} \.{\land} pc \.{'} \.{=}\@w{do}}%
+\@x{\@s{65.65} \.{\ELSE} \.{\land} pc \.{'} \.{=}\@w{Done}}%
+\@x{\@s{42.38} \.{\land} {\UNCHANGED} {\langle} x ,\, y {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ do \.{\defeq} \.{\land} pc \.{=}\@w{do}}%
+\@x{\@s{29.74} \.{\land} {\IF} x \.{<} y}%
+\@x{\@s{53.00} \.{\THEN} \.{\land} y \.{'}\@s{0.10} \.{=} y \.{-} x}%
+\@x{\@s{84.31} \.{\land} x \.{'} \.{=} x}%
+\@x{\@s{53.00} \.{\ELSE} \.{\land} x \.{'} \.{=} x \.{-} y}%
+\@x{\@s{84.31} \.{\land} y \.{'}\@s{0.10} \.{=} y}%
+\@x{\@s{29.74} \.{\land} pc \.{'} \.{=}\@w{judge}}%
 \@pvspace{8.0pt}%
 \@x{}%
 \@y{\@s{0}%
@@ -1015,10 +1024,12 @@
 \@xx{}%
 \@x{ Terminating \.{\defeq} pc \.{=}\@w{Done} \.{\land} {\UNCHANGED} vars}%
 \@pvspace{8.0pt}%
-\@x{ Next \.{\defeq} Lbl\_1}%
-\@x{\@s{52.13} \.{\lor} Terminating}%
+\@x{ Next \.{\defeq} judge \.{\lor} do}%
+\@x{\@s{52.13} \.{\lor}\@s{0.08} Terminating}%
 \@pvspace{8.0pt}%
-\@x{ Spec\@s{1.46} \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
+ \@x{ Spec\@s{1.46} \.{\defeq} \.{\land} Init \.{\land} {\Box} [ Next ]_{
+ vars}}%
+\@x{\@s{39.83} \.{\land} {\WF}_{ vars} ( Next )}%
 \@pvspace{8.0pt}%
 \@x{ Termination \.{\defeq} {\Diamond} ( pc \.{=}\@w{Done} )}%
 \@pvspace{8.0pt}%
@@ -1028,21 +1039,26 @@
 }%
 \@xx{}%
  \@x{ Safety \.{\defeq} ( pc \.{=}\@w{Done} ) \.{\implies} ( x \.{=} y )
- \.{\land} ( x \.{=} GCD ( x0 ,\, y0 ) )}%
+ \.{\land} ( x \.{=} GCD ( M ,\, N ) )}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Safety and Liveness (Termination in this part) means Correctness
+\end{cpar}%
+\end{lcom}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{\.{\,\backslash\,}\.{*}} Modification History
+\ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*}} Last modified \ensuremath{Fri}
- \ensuremath{Sep} 24 19:56:42 \ensuremath{CST} 2021 by \ensuremath{wrz
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Sep} 26
+ 09:36:52 \ensuremath{CST} 2021 by \ensuremath{wrz
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*}} Created \ensuremath{Fri}
- \ensuremath{Sep} 24 16:52:34 \ensuremath{CST} 2021 by \ensuremath{wrz
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Fri} \ensuremath{Sep} 24
+ 16:52:34 \ensuremath{CST} 2021 by \ensuremath{wrz
 }%
 \end{cpar}%
 \end{lcom}%

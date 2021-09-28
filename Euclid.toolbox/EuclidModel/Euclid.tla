@@ -3,49 +3,44 @@ EXTENDS Integers, GCD
 CONSTANTS M, N
 (***************************************************************************
 --fair algorithm Euclid {
-    variables x \in 1..N, y \in 1..N, x0 = x, y0 = y;
-    { loop: while (x # y) { update: if (x < y) {y := y - x}
+\*    variables x \in 1..N, y \in 1..N, x0 = x, y0 = y;
+    variables x = M, y = N;
+    { judge: while (x # y) { do: if (x < y) {y := y - x}
                       else {x := x - y}
                     };
-      print <<x, y>>;
-      assert (x = y) /\ (x = GCD(x0, y0));
+\*      print <<x, y>>;
+\*      assert (x = y) /\ (x = GCD(x0, y0));
     }
 }
  ***************************************************************************)
-\* BEGIN TRANSLATION (chksum(pcal) = "c1b7766c" /\ chksum(tla) = "9dec3943")
-VARIABLES x, y, x0, y0, pc
+\* BEGIN TRANSLATION (chksum(pcal) = "65d8d3f8" /\ chksum(tla) = "9d2756b")
+VARIABLES x, y, pc
 
-vars == << x, y, x0, y0, pc >>
+vars == << x, y, pc >>
 
 Init == (* Global variables *)
-        /\ x \in 1..N
-        /\ y \in 1..N
-        /\ x0 = x
-        /\ y0 = y
-        /\ pc = "loop"
+        /\ x = M
+        /\ y = N
+        /\ pc = "judge"
 
-loop == /\ pc = "loop"
-        /\ IF x # y
-              THEN /\ pc' = "update"
-              ELSE /\ PrintT(<<x, y>>)
-                   /\ Assert((x = y) /\ (x = GCD(x0, y0)), 
-                             "Failure of assertion at line 11, column 7.")
-                   /\ pc' = "Done"
-        /\ UNCHANGED << x, y, x0, y0 >>
+judge == /\ pc = "judge"
+         /\ IF x # y
+               THEN /\ pc' = "do"
+               ELSE /\ pc' = "Done"
+         /\ UNCHANGED << x, y >>
 
-update == /\ pc = "update"
-          /\ IF x < y
-                THEN /\ y' = y - x
-                     /\ x' = x
-                ELSE /\ x' = x - y
-                     /\ y' = y
-          /\ pc' = "loop"
-          /\ UNCHANGED << x0, y0 >>
+do == /\ pc = "do"
+      /\ IF x < y
+            THEN /\ y' = y - x
+                 /\ x' = x
+            ELSE /\ x' = x - y
+                 /\ y' = y
+      /\ pc' = "judge"
 
 (* Allow infinite stuttering to prevent deadlock on termination. *)
 Terminating == pc = "Done" /\ UNCHANGED vars
 
-Next == loop \/ update
+Next == judge \/ do
            \/ Terminating
 
 Spec == /\ Init /\ [][Next]_vars
@@ -54,8 +49,11 @@ Spec == /\ Init /\ [][Next]_vars
 Termination == <>(pc = "Done")
 
 \* END TRANSLATION 
-Safety == (pc = "Done") => (x = y) /\ (x = GCD(x0,y0))
+Safety == (pc = "Done") => (x = y) /\ (x = GCD(M, N))
+(***************************************************************************)
+(* Safety and Liveness (Termination in this part) means Correctness        *)
+(***************************************************************************) 
 =============================================================================
 \* Modification History
-\* Last modified Fri Sep 24 20:29:02 CST 2021 by wrz
+\* Last modified Sun Sep 26 09:36:52 CST 2021 by wrz
 \* Created Fri Sep 24 16:52:34 CST 2021 by wrz

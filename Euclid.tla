@@ -5,7 +5,7 @@ CONSTANTS M, N
 --fair algorithm Euclid {
 \*    variables x \in 1..N, y \in 1..N, x0 = x, y0 = y;
     variables x = M, y = N;
-    { while (x # y) { if (x < y) {y := y - x}
+    { judge: while (x # y) { do: if (x < y) {y := y - x}
                       else {x := x - y}
                     };
 \*      print <<x, y>>;
@@ -13,7 +13,7 @@ CONSTANTS M, N
     }
 }
  ***************************************************************************)
-\* BEGIN TRANSLATION (chksum(pcal) = "aba70d42" /\ chksum(tla) = "6b100a2a")
+\* BEGIN TRANSLATION (chksum(pcal) = "65d8d3f8" /\ chksum(tla) = "9d2756b")
 VARIABLES x, y, pc
 
 vars == << x, y, pc >>
@@ -21,23 +21,26 @@ vars == << x, y, pc >>
 Init == (* Global variables *)
         /\ x = M
         /\ y = N
-        /\ pc = "Lbl_1"
+        /\ pc = "judge"
 
-Lbl_1 == /\ pc = "Lbl_1"
+judge == /\ pc = "judge"
          /\ IF x # y
-               THEN /\ IF x < y
-                          THEN /\ y' = y - x
-                               /\ x' = x
-                          ELSE /\ x' = x - y
-                               /\ y' = y
-                    /\ pc' = "Lbl_1"
+               THEN /\ pc' = "do"
                ELSE /\ pc' = "Done"
-                    /\ UNCHANGED << x, y >>
+         /\ UNCHANGED << x, y >>
+
+do == /\ pc = "do"
+      /\ IF x < y
+            THEN /\ y' = y - x
+                 /\ x' = x
+            ELSE /\ x' = x - y
+                 /\ y' = y
+      /\ pc' = "judge"
 
 (* Allow infinite stuttering to prevent deadlock on termination. *)
 Terminating == pc = "Done" /\ UNCHANGED vars
 
-Next == Lbl_1
+Next == judge \/ do
            \/ Terminating
 
 Spec == /\ Init /\ [][Next]_vars
@@ -52,5 +55,5 @@ Safety == (pc = "Done") => (x = y) /\ (x = GCD(M, N))
 (***************************************************************************) 
 =============================================================================
 \* Modification History
-\* Last modified Fri Sep 24 20:35:55 CST 2021 by wrz
+\* Last modified Sun Sep 26 09:36:52 CST 2021 by wrz
 \* Created Fri Sep 24 16:52:34 CST 2021 by wrz
