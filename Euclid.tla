@@ -55,5 +55,5 @@ Safety == (pc = "Done") => (x = y) /\ (x = GCD(M, N))
 (***************************************************************************) 
 =============================================================================
 \* Modification History
-\* Last modified Sun Sep 26 09:36:52 CST 2021 by wrz
+\* Last modified Wed Sep 29 15:21:51 CST 2021 by wrz
 \* Created Fri Sep 24 16:52:34 CST 2021 by wrz
